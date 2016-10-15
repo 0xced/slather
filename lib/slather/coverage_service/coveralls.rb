@@ -183,6 +183,10 @@ module Slather
           f.write(coveralls_coverage_data)
           f.close
 
+          if verbose_mode
+            puts "Posting coverage data to #{coveralls_api_jobs_path}"
+            puts coveralls_coverage_data
+          end
           curl_result = `curl -s --form json_file=@#{f.path} #{coveralls_api_jobs_path}`
 
           if curl_result.is_a? String 
